@@ -1,4 +1,6 @@
+using AutoMapper;
 using Core.Entities;
+using Core.Interfaces.IData;
 using Core.Interfaces.IServices;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAdminApp.Models;
 using WebAdminApp.Services;
 
 namespace WebAdminApp
@@ -47,7 +50,13 @@ namespace WebAdminApp
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            
+            // Auto Mapper Configurations
+            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
