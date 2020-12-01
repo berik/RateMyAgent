@@ -1,4 +1,4 @@
-export const ApplicationName = 'WebEmployeeApp';
+export const ApplicationName = 'WebAdminApp';
 
 export const ReturnUrlType = 'returnUrl';
 
