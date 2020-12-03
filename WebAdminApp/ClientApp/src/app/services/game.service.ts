@@ -1,10 +1,10 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { GameDto } from "../models/GameDto";
+import { SoccerGameDto } from "../models/SoccerGameDto";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class GameService {
   baseApiUrl = "";
@@ -12,7 +12,7 @@ export class GameService {
     this.baseApiUrl = baseUrl + "api/Game";
   }
 
-  getGames(): Observable<GameDto[]> {
-    return this.http.get<GameDto[]>(`${this.baseApiUrl}`);
+  getGames(): Observable<SoccerGameDto[]> {
+    return this.http.get<SoccerGameDto[]>(`${this.baseApiUrl}`);
   }
 }

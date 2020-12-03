@@ -6,9 +6,9 @@ using Core.Interfaces.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebAdminApp.Models;
+using WebEmployeeApp.Models;
 
-namespace WebAdminApp.Controllers
+namespace WebEmployeeApp.Controllers
 {
     [Authorize]
     [ApiController]

@@ -1,18 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { SoccerGameDto } from "src/app/models/SoccerGameDto";
-import { GameService } from "src/app/services/game.service";
+import { GameServiceService } from "src/app/services/game-service.service";
 
 @Component({
-  selector: "app-game-list",
-  templateUrl: "./game-list.component.html",
-  styleUrls: ["./game-list.component.css"],
+  selector: "app-game",
+  templateUrl: "./game.component.html",
+  styleUrls: ["./game.component.css"],
 })
-export class GameListComponent implements OnInit {
+export class GameComponent implements OnInit {
   isLoading = false;
   games: SoccerGameDto[];
-  constructor(private gameService: GameService) {}
-
+  constructor(private gameService: GameServiceService) {}
   ngOnInit() {
+    this.getGames();
+  }
+
+  getGames() {
     this.isLoading = true;
     this.gameService.getGames().subscribe((result) => {
       this.isLoading = false;
