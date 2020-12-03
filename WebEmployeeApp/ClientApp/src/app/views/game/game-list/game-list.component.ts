@@ -1,13 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { GameStatus } from "src/app/models/enums/GameStatus";
 import { SoccerGameDto } from "src/app/models/SoccerGameDto";
 import { GameServiceService } from "src/app/services/game-service.service";
 
 @Component({
-  selector: "app-game",
-  templateUrl: "./game.component.html",
-  styleUrls: ["./game.component.css"],
+  selector: "app-game-list",
+  templateUrl: "./game-list.component.html",
+  styleUrls: ["./game-list.component.css"],
 })
-export class GameComponent implements OnInit {
+export class GameListComponent implements OnInit {
   isLoading = false;
   games: SoccerGameDto[];
   constructor(private gameService: GameServiceService) {}
@@ -21,5 +22,11 @@ export class GameComponent implements OnInit {
       this.isLoading = false;
       this.games = result;
     });
+  }
+
+  getStatus(gameStatus: GameStatus): string {
+    if (gameStatus == GameStatus.NotStarted) return "Start Game";
+    else if (gameStatus == GameStatus.InProgress) return "Continue Game";
+    return "Completed Game";
   }
 }

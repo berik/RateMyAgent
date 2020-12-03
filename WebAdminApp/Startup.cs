@@ -2,6 +2,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.IData;
 using Core.Interfaces.IServices;
+using Core.Services;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -53,6 +54,7 @@ namespace WebAdminApp
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IGameService, GameService>();
             
             // Auto Mapper Configurations
             services.AddAutoMapper(typeof(MappingProfile));

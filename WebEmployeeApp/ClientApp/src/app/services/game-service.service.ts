@@ -15,4 +15,16 @@ export class GameServiceService {
   getGames(): Observable<SoccerGameDto[]> {
     return this.http.get<SoccerGameDto[]>(`${this.baseApiUrl}`);
   }
+
+  getGame(gameId: string): Observable<SoccerGameDto> {
+    return this.http.get<SoccerGameDto>(`${this.baseApiUrl}/${gameId}`);
+  }
+
+  assignGame(gameId: string): Observable<string> {
+    return this.http.put<string>(`${this.baseApiUrl}/AssignGame/${gameId}`, {});
+  }
+
+  startGame(gameId: string): Observable<string> {
+    return this.http.put<string>(`${this.baseApiUrl}/StartGame/${gameId}`, {});
+  }
 }

@@ -11,9 +11,7 @@ using WebAdminApp.Models;
 namespace WebAdminApp.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class GameController
+    public class GameController : ApiBaseController
     {
         private readonly ILogger<GameController> _logger;
         private readonly IMapper _mapper;
