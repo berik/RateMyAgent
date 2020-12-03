@@ -1,13 +1,17 @@
+using AutoMapper;
 using Core.Entities;
+using Core.Interfaces.IData;
 using Core.Interfaces.IServices;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebEmployeeApp.Models;
 using WebEmployeeApp.Services;
 
 namespace WebEmployeeApp
@@ -38,14 +42,18 @@ namespace WebEmployeeApp
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
-
             services.AddControllersWithViews();
             services.AddRazorPages();
-
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            
+            // Auto Mapper Configurations
+            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +73,10 @@ namespace WebEmployeeApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
 
             app.UseRouting();
 
@@ -82,12 +93,14 @@ namespace WebEmployeeApp
 
             app.UseSpa(spa =>
             {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    // spa.UseReactDevelopmentServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4300");
                 }
             });
         }

@@ -118,7 +118,7 @@ namespace Infrastructure
                 new SoccerTeam()
                 {
                     Id = BarcelonaTeamId,
-                    Name = "Manchester City"
+                    Name = "Barcelona"
                 }
             });
         }
