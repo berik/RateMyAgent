@@ -1,11 +1,11 @@
 # RateMyAgent
 
 This app is architectured using clean code design. 
-### Core - contains only entities, interface and domain logic
-### Infrastructure - contains reference to Core and implements data layer
-### Admin - is a API server and contain SPA Angular. Ideally is used for adding new games, players and basically managing whole ecosystem
-### WebAdminApp - is a API server and contain SPA Angular. Ideally is used for adding new games, players and basically managing whole ecosystem
-### WebEmployeeApp - is a API server and contain SPA Angular. Ideally is by employees to just log soccer events.
+`Core` - contains only entities, interface and domain logic. <br/>
+`Infrastructure` - contains reference to Core and implements data layer. <br/>
+`Admin` - is a API server and contain SPA Angular. Ideally is used for adding new games, players and basically managing whole ecosystem. <br/>
+`WebAdminApp` - is a API server and contain SPA Angular. Ideally is used for adding new games, players and basically managing whole ecosystem. <br/>
+`WebEmployeeApp` - is a API server and contain SPA Angular. Ideally is by employees to just log soccer events.  <br/>
 
 ### Things done:
 - [x] Added authentication/authorization
