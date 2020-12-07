@@ -10,7 +10,10 @@ import { SoccerGameDto } from "src/app/models/SoccerGameDto";
 import { SoccerPlayerDto } from "src/app/models/SoccerPlayerDto";
 import { SoccerTeamDto } from "src/app/models/SoccerTeamDto";
 import { GameServiceService } from "src/app/services/game-service.service";
-import { SoccerEventService } from "src/app/services/soccer-event.service";
+
+import { faFutbol } from "@fortawesome/free-solid-svg-icons";
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSquare } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-game-details",
@@ -42,16 +45,17 @@ export class GameDetailsComponent implements OnInit {
     soccerTeamId: "",
   };
   eventForm: FormGroup;
+  faFutbol = faFutbol;
+  faExchangeAlt = faExchangeAlt;
+  faSquare = faSquare;
   constructor(
     private route: ActivatedRoute,
-    private gameService: GameServiceService,
-    private soccerEventService: SoccerEventService
+    private gameService: GameServiceService
   ) {}
   ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get("gameId");
     if (this.gameId) {
       this.getGame(this.gameId);
-      this.getSoccerEvents(this.gameId);
     }
     this.initForm();
   }
@@ -64,21 +68,11 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
-  getSoccerEvents(gameId: string) {
-    this.isLoadingEvents = true;
-    this.soccerEventService.getSoccerEvents(gameId).subscribe((result) => {
-      this.isLoadingEvents = false;
-      this.soccerEvents = result;
-    });
-  }
-
   getGame(gameId: string) {
     this.isLoading = true;
     this.gameService.getGame(gameId).subscribe((result) => {
       this.isLoading = false;
       this.game = result;
-      this.teams.push(this.game.homeSoccerTeam);
-      this.teams.push(this.game.guestSoccerTeam);
     });
   }
 
@@ -96,5 +90,31 @@ export class GameDetailsComponent implements OnInit {
       this.gameIsUpdating = false;
       this.game.gameStatus = 2;
     });
+  }
+
+  getTeamName(gameId: string) {
+    if (this.game.guestSoccerTeam.id === gameId) {
+      return this.game.guestSoccerTeam.name;
+    } else {
+      return this.game.homeSoccerTeam.name;
+    }
+  }
+
+  getTitleName(game: SoccerGameDto): string {
+    const homeTeamId = game.homeSoccerTeam.id;
+    const guestTeamId = game.guestSoccerTeam.id;
+
+    const scoreOfHometeam = game.soccerEvents.filter(
+      (a) =>
+        a.soccerTeamId == homeTeamId &&
+        a.soccerEventType == SoccerEventType.ScoreGoal
+    ).length;
+    const scoreOfGuestTeam = game.soccerEvents.filter(
+      (a) =>
+        a.soccerTeamId == guestTeamId &&
+        a.soccerEventType == SoccerEventType.ScoreGoal
+    ).length;
+
+    return `${game.homeSoccerTeam.name} ${scoreOfHometeam} : ${scoreOfGuestTeam} ${game.guestSoccerTeam.name}`;
   }
 }

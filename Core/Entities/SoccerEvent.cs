@@ -21,6 +21,11 @@ namespace Core.Entities
         public int SoccerPlayerId { get; set; }
         
         /// <summary>
+        /// Soccer team ID
+        /// </summary>
+        public int SoccerTeamId { get; set; }
+        
+        /// <summary>
         /// Type event
         /// </summary>
         public SoccerEventType SoccerEventType { get; set; }
@@ -34,5 +39,10 @@ namespace Core.Entities
         /// Nav.property
         /// </summary>
         public virtual SoccerPlayer SoccerPlayer { get; set; }
+        
+        /// <summary>
+        /// Nav.property
+        /// </summary>
+        public virtual SoccerTeam SoccerTeam { get; set; }
     }
 }

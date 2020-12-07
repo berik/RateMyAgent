@@ -96,7 +96,6 @@ namespace Infrastructure
                 RoleId = roleId,
                 UserId = adminId
             });
-
             modelBuilder.Entity<SoccerTeam>(ConfigureSoccerTeam);
             modelBuilder.Entity<SoccerPlayer>(ConfigureSoccerPlayer);
             modelBuilder.Entity<SoccerGame>(ConfigureSoccerGame);
@@ -106,6 +105,10 @@ namespace Infrastructure
         private void ConfigureSoccerTeam(EntityTypeBuilder<SoccerTeam> modelBuilder)
         {
             modelBuilder.Property(a => a.Name).IsRequired();
+            modelBuilder
+                .HasMany(a => a.Players)
+                .WithOne(a => a.SoccerTeam)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // populate initial data
             modelBuilder.HasData(new List<SoccerTeam>()
@@ -300,12 +303,20 @@ namespace Infrastructure
             modelBuilder
                 .HasOne(p => p.SoccerPlayer)
                 .WithMany(b => b.SoccerEvents)
-                .HasForeignKey(p => p.SoccerPlayerId);
+                .HasForeignKey(p => p.SoccerPlayerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder
                 .HasOne(p => p.SoccerGame)
                 .WithMany(b => b.SoccerEvents)
-                .HasForeignKey(p => p.SoccerGameId);
+                .HasForeignKey(p => p.SoccerGameId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder
+                .HasOne(p => p.SoccerTeam)
+                .WithMany(b => b.SoccerEvents)
+                .HasForeignKey(p => p.SoccerTeamId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

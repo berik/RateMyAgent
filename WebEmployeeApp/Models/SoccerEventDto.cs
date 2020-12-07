@@ -7,8 +7,10 @@ namespace WebEmployeeApp.Models
     public class SoccerEventDto
     {
         public Guid Id { get; set; }
-        public SoccerEventType SoccerEventType { get; set; }
+        public int SoccerGameId { get; set; }
+        public int SoccerTeamId { get; set; }
         public SoccerPlayerDto SoccerPlayer { get; set; }
+        public SoccerEventType SoccerEventType { get; set; }
     }
 
     public class CreateSoccerEventDto

@@ -13,6 +13,7 @@ import { AuthorizeInterceptor } from "src/api-authorization/authorize.intercepto
 import { GameDetailsComponent } from "./views/game/game-details/game-details.component";
 import { GameListComponent } from "./views/game/game-list/game-list.component";
 import { AddSoccerEventComponent } from "./views/game/add-soccer-event/add-soccer-event.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AddSoccerEventComponent } from "./views/game/add-soccer-event/add-socce
     FormsModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
       {

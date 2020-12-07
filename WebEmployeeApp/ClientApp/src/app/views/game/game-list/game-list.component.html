@@ -15,23 +15,16 @@
       <tr *ngFor="let game of games">
         <td>{{ game.name }}</td>
         <td>
-          {{ getStatus(game) }}
+          {{ getStatus(game.gameStatus) }}
         </td>
         <td>
           <a
             type="button"
             class="btn btn-success mr-1"
             [routerLink]="['/games', game.id]"
-            *ngIf="game.gameStatus != 0"
           >
             View
           </a>
-          <button class="btn btn-success" *ngIf="game.gameStatus == 0">
-            Start report
-          </button>
-          <button class="btn btn-success" *ngIf="game.gameStatus == 1">
-            Continue report
-          </button>
         </td>
       </tr>
     </tbody>

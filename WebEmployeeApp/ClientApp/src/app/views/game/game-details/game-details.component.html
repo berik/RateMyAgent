@@ -4,7 +4,6 @@
   </div>
 
   <div *ngIf="game">
-    <h5>Report to {{ game.name }}</h5>
     <div class="mb-3">
       <a
         class="btn btn-success mr-1"
@@ -42,6 +41,10 @@
       </button>
     </div>
 
+    <div class="mb-3 text-center">
+      <h2>{{ getTitleName(game) }}</h2>
+    </div>
+
     <div class="mb-3">
       <table class="table">
         <thead>
@@ -53,10 +56,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let soccerEvent of soccerEvents">
-            <td>{{ soccerEvent.soccerTeamId }}</td>
+          <tr *ngFor="let soccerEvent of game.soccerEvents">
+            <td>{{ getTeamName(soccerEvent.soccerTeamId) }}</td>
             <td>{{ soccerEvent.soccerPlayer.name }}</td>
-            <td>event</td>
+            <td>
+              <fa-icon
+                class="yellow-card"
+                [icon]="faSquare"
+                *ngIf="soccerEvent.soccerEventType == 0"
+              ></fa-icon>
+              <fa-icon
+                class="red-card"
+                [icon]="faSquare"
+                *ngIf="soccerEvent.soccerEventType == 1"
+              ></fa-icon>
+              <fa-icon
+                [icon]="faExchangeAlt"
+                *ngIf="soccerEvent.soccerEventType == 2"
+              ></fa-icon>
+              <fa-icon
+                [icon]="faFutbol"
+                *ngIf="soccerEvent.soccerEventType == 3"
+              ></fa-icon>
+
+              {{ events[soccerEvent.soccerEventType].name }}
+            </td>
             <td>
               <button class="btn btn-success">Edit</button>
             </td>

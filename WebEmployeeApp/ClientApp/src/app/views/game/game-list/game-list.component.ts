@@ -25,8 +25,8 @@ export class GameListComponent implements OnInit {
   }
 
   getStatus(gameStatus: GameStatus): string {
-    if (gameStatus == GameStatus.NotStarted) return "Start reporting";
-    else if (gameStatus == GameStatus.InProgress) return "Continue reporting";
-    return "Reporting completed";
+    if (gameStatus == GameStatus.NotStarted) return "Game not started";
+    else if (gameStatus == GameStatus.InProgress) return "Game in progress";
+    return "Game completed";
   }
 }

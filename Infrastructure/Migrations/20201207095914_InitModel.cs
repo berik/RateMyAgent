@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class InitDataModel : Migration
+    public partial class InitModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -285,9 +285,10 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SoccerEventType = table.Column<int>(type: "int", nullable: false),
+                    SoccerGameId = table.Column<int>(type: "int", nullable: false),
                     SoccerPlayerId = table.Column<int>(type: "int", nullable: false),
-                    SoccerGameId = table.Column<int>(type: "int", nullable: true),
+                    SoccerTeamId = table.Column<int>(type: "int", nullable: false),
+                    SoccerEventType = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -307,18 +308,24 @@ namespace Infrastructure.Migrations
                         column: x => x.SoccerPlayerId,
                         principalTable: "SoccerPlayers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SoccerEvents_SoccerTeams_SoccerTeamId",
+                        column: x => x.SoccerTeamId,
+                        principalTable: "SoccerTeams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b43aaa03-ef03-4ec8-815b-5c79929361e9", "e67b9900-b570-4b84-bf48-51b7f018fa6a", "Admin", "ADMIN" });
+                values: new object[] { "b43aaa03-ef03-4ec8-815b-5c79929361e9", "bcbbd2a4-15aa-4d26-842f-98388cfcbe8d", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "4ab306a9-ff4c-46ca-a6f9-c47383d928d8", 0, "795e2662-29fc-4841-a500-cec7d99be060", "berik.assylbekov@gmail.com", true, false, null, null, "BERIK.ASSYLBEKOV@GMAIL.COM", "BERIK.ASSYLBEKOV@GMAIL.COM", "AQAAAAEAACcQAAAAEBF3lL7tsqq5yzfcZ13CSHbM/MLf2DzNdSXP4h3wJ90zLEkHIZCeJngZRyH64mqkAg==", null, false, "018b3edc-a2c1-42b0-b6f0-51d636f21fc1", false, "berik.assylbekov@gmail.com" });
+                values: new object[] { "4ab306a9-ff4c-46ca-a6f9-c47383d928d8", 0, "b6a31fd1-549d-4c20-98b3-37dca73ee321", "berik.assylbekov@gmail.com", true, false, null, null, "BERIK.ASSYLBEKOV@GMAIL.COM", "BERIK.ASSYLBEKOV@GMAIL.COM", "AQAAAAEAACcQAAAAEAD4zvDT49u7tNk0fi6AoYVlTKdSr+9PSMZAbfsdA6EOkcJH3pJ+rikM/lEqlmXGSg==", null, false, "d43e241b-f669-46dc-a6e7-65841f6c6fff", false, "berik.assylbekov@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "SoccerTeams",
@@ -326,7 +333,7 @@ namespace Infrastructure.Migrations
                 values: new object[,]
                 {
                     { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Manchester City" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Manchester City" }
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Barcelona" }
                 });
 
             migrationBuilder.InsertData(
@@ -440,6 +447,11 @@ namespace Infrastructure.Migrations
                 name: "IX_SoccerEvents_SoccerPlayerId",
                 table: "SoccerEvents",
                 column: "SoccerPlayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SoccerEvents_SoccerTeamId",
+                table: "SoccerEvents",
+                column: "SoccerTeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SoccerGames_GuestSoccerTeamId",

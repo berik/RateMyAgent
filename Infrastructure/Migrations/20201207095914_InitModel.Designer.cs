@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201201222531_InitDataModel")]
-    partial class InitDataModel
+    [Migration("20201207095914_InitModel")]
+    partial class InitModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,15 +93,15 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4ab306a9-ff4c-46ca-a6f9-c47383d928d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "795e2662-29fc-4841-a500-cec7d99be060",
+                            ConcurrencyStamp = "b6a31fd1-549d-4c20-98b3-37dca73ee321",
                             Email = "berik.assylbekov@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERIK.ASSYLBEKOV@GMAIL.COM",
                             NormalizedUserName = "BERIK.ASSYLBEKOV@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBF3lL7tsqq5yzfcZ13CSHbM/MLf2DzNdSXP4h3wJ90zLEkHIZCeJngZRyH64mqkAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAD4zvDT49u7tNk0fi6AoYVlTKdSr+9PSMZAbfsdA6EOkcJH3pJ+rikM/lEqlmXGSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "018b3edc-a2c1-42b0-b6f0-51d636f21fc1",
+                            SecurityStamp = "d43e241b-f669-46dc-a6e7-65841f6c6fff",
                             TwoFactorEnabled = false,
                             UserName = "berik.assylbekov@gmail.com"
                         });
@@ -128,10 +128,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("SoccerEventType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SoccerGameId")
+                    b.Property<int>("SoccerGameId")
                         .HasColumnType("int");
 
                     b.Property<int>("SoccerPlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoccerTeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -139,6 +142,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("SoccerGameId");
 
                     b.HasIndex("SoccerPlayerId");
+
+                    b.HasIndex("SoccerTeamId");
 
                     b.ToTable("SoccerEvents");
                 });
@@ -440,7 +445,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Manchester City"
+                            Name = "Barcelona"
                         });
                 });
 
@@ -577,7 +582,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = "b43aaa03-ef03-4ec8-815b-5c79929361e9",
-                            ConcurrencyStamp = "e67b9900-b570-4b84-bf48-51b7f018fa6a",
+                            ConcurrencyStamp = "bcbbd2a4-15aa-4d26-842f-98388cfcbe8d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -700,17 +705,29 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.SoccerEvent", b =>
                 {
-                    b.HasOne("Core.Entities.SoccerGame", null)
+                    b.HasOne("Core.Entities.SoccerGame", "SoccerGame")
                         .WithMany("SoccerEvents")
-                        .HasForeignKey("SoccerGameId");
+                        .HasForeignKey("SoccerGameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.SoccerPlayer", "SoccerPlayer")
                         .WithMany("SoccerEvents")
                         .HasForeignKey("SoccerPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.SoccerTeam", "SoccerTeam")
+                        .WithMany("SoccerEvents")
+                        .HasForeignKey("SoccerTeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("SoccerGame");
+
                     b.Navigation("SoccerPlayer");
+
+                    b.Navigation("SoccerTeam");
                 });
 
             modelBuilder.Entity("Core.Entities.SoccerGame", b =>
@@ -822,6 +839,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.SoccerTeam", b =>
                 {
                     b.Navigation("Players");
+
+                    b.Navigation("SoccerEvents");
 
                     b.Navigation("SoccerGames");
                 });
