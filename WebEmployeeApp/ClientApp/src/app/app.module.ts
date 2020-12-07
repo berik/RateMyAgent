@@ -14,6 +14,7 @@ import { GameDetailsComponent } from "./views/game/game-details/game-details.com
 import { GameListComponent } from "./views/game/game-list/game-list.component";
 import { AddSoccerEventComponent } from "./views/game/add-soccer-event/add-soccer-event.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { EditSoccerEventComponent } from "./views/game/edit-soccer-event/edit-soccer-event.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     GameListComponent,
     GameDetailsComponent,
     AddSoccerEventComponent,
+    EditSoccerEventComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -46,6 +48,11 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
       {
         path: "games/:gameId/new-event",
         component: AddSoccerEventComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: "games/:gameId/edit/:eventId",
+        component: EditSoccerEventComponent,
         canActivate: [AuthorizeGuard],
       },
     ]),

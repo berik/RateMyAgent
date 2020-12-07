@@ -220,7 +220,6 @@ namespace Infrastructure.Migrations
                     ReporterId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     HomeSoccerTeamId = table.Column<int>(type: "int", nullable: false),
                     GuestSoccerTeamId = table.Column<int>(type: "int", nullable: false),
-                    SoccerTeamId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -244,12 +243,6 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_SoccerGames_SoccerTeams_HomeSoccerTeamId",
                         column: x => x.HomeSoccerTeamId,
-                        principalTable: "SoccerTeams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SoccerGames_SoccerTeams_SoccerTeamId",
-                        column: x => x.SoccerTeamId,
                         principalTable: "SoccerTeams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -320,20 +313,20 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b43aaa03-ef03-4ec8-815b-5c79929361e9", "bcbbd2a4-15aa-4d26-842f-98388cfcbe8d", "Admin", "ADMIN" });
+                values: new object[] { "b43aaa03-ef03-4ec8-815b-5c79929361e9", "4b61eda1-7c8a-4c6f-affa-6fa5d40b49b6", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "4ab306a9-ff4c-46ca-a6f9-c47383d928d8", 0, "b6a31fd1-549d-4c20-98b3-37dca73ee321", "berik.assylbekov@gmail.com", true, false, null, null, "BERIK.ASSYLBEKOV@GMAIL.COM", "BERIK.ASSYLBEKOV@GMAIL.COM", "AQAAAAEAACcQAAAAEAD4zvDT49u7tNk0fi6AoYVlTKdSr+9PSMZAbfsdA6EOkcJH3pJ+rikM/lEqlmXGSg==", null, false, "d43e241b-f669-46dc-a6e7-65841f6c6fff", false, "berik.assylbekov@gmail.com" });
+                values: new object[] { "4ab306a9-ff4c-46ca-a6f9-c47383d928d8", 0, "4436f249-2a6b-4d5f-9162-4c7e3c78f050", "berik.assylbekov@gmail.com", true, false, null, null, "BERIK.ASSYLBEKOV@GMAIL.COM", "BERIK.ASSYLBEKOV@GMAIL.COM", "AQAAAAEAACcQAAAAEJFlVU5r6buwHEZ2VrnGYuEV09vowwfbIhX7bjT9g8b2SsSbujP3ooCvEAxBaUp0eA==", null, false, "8724c1b5-123b-4594-8f44-78c2d17b2c2c", false, "berik.assylbekov@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "SoccerTeams",
                 columns: new[] { "Id", "Created", "CreatedBy", "LastModified", "LastModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Manchester City" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Barcelona" }
+                    { 1, new DateTime(2020, 12, 7, 23, 4, 21, 517, DateTimeKind.Local).AddTicks(4530), null, null, null, "Manchester City" },
+                    { 2, new DateTime(2020, 12, 7, 23, 4, 21, 532, DateTimeKind.Local).AddTicks(2590), null, null, null, "Barcelona" }
                 });
 
             migrationBuilder.InsertData(
@@ -343,34 +336,34 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "SoccerGames",
-                columns: new[] { "Id", "Created", "CreatedBy", "GameStatus", "GuestSoccerTeamId", "HomeSoccerTeamId", "LastModified", "LastModifiedBy", "Name", "ReporterId", "SoccerTeamId" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, 2, 1, null, null, "Manchester City vs Barcelona", null, null });
+                columns: new[] { "Id", "Created", "CreatedBy", "GameStatus", "GuestSoccerTeamId", "HomeSoccerTeamId", "LastModified", "LastModifiedBy", "Name", "ReporterId" },
+                values: new object[] { 1, new DateTime(2020, 12, 7, 23, 4, 21, 536, DateTimeKind.Local).AddTicks(4420), null, 0, 2, 1, null, null, "Manchester City vs Barcelona", null });
 
             migrationBuilder.InsertData(
                 table: "SoccerPlayers",
                 columns: new[] { "Id", "Created", "CreatedBy", "LastModified", "LastModifiedBy", "Name", "SoccerPlayerType", "SoccerTeamId" },
                 values: new object[,]
                 {
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Cancelo Joao", 1, 1 },
-                    { 19, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Trincao", 3, 2 },
-                    { 18, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Messi Lionel", 3, 2 },
-                    { 17, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "de Jong Frenkie", 3, 2 },
-                    { 16, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Puig Ricard", 2, 2 },
-                    { 15, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Coutinho Philippe", 2, 2 },
-                    { 14, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Mingueza Oscar", 1, 2 },
-                    { 13, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Firpo Junior", 1, 2 },
-                    { 12, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Alba Jordi", 1, 2 },
-                    { 11, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Neto", 0, 2 },
-                    { 20, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Koeman Ronald", 4, 2 },
-                    { 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Guardiola Pep", 4, 1 },
-                    { 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Sterling Raheem", 3, 1 },
-                    { 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Gabriel Jesus", 3, 1 },
-                    { 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Aguero Sergio", 3, 1 },
-                    { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Foden Phil", 2, 1 },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "De Bruyne Kevin", 2, 1 },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Dias Ruben", 1, 1 },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Ake Nathan", 1, 1 },
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Ederson", 0, 1 }
+                    { 3, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7200), null, null, null, "Cancelo Joao", 1, 1 },
+                    { 19, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7330), null, null, null, "Trincao", 3, 2 },
+                    { 18, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320), null, null, null, "Messi Lionel", 3, 2 },
+                    { 17, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320), null, null, null, "de Jong Frenkie", 3, 2 },
+                    { 16, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320), null, null, null, "Puig Ricard", 2, 2 },
+                    { 15, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310), null, null, null, "Coutinho Philippe", 2, 2 },
+                    { 14, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310), null, null, null, "Mingueza Oscar", 1, 2 },
+                    { 13, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310), null, null, null, "Firpo Junior", 1, 2 },
+                    { 12, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310), null, null, null, "Alba Jordi", 1, 2 },
+                    { 11, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300), null, null, null, "Neto", 0, 2 },
+                    { 20, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7330), null, null, null, "Koeman Ronald", 4, 2 },
+                    { 10, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300), null, null, null, "Guardiola Pep", 4, 1 },
+                    { 9, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300), null, null, null, "Sterling Raheem", 3, 1 },
+                    { 8, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290), null, null, null, "Gabriel Jesus", 3, 1 },
+                    { 7, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290), null, null, null, "Aguero Sergio", 3, 1 },
+                    { 6, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290), null, null, null, "Foden Phil", 2, 1 },
+                    { 5, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7280), null, null, null, "De Bruyne Kevin", 2, 1 },
+                    { 4, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7210), null, null, null, "Dias Ruben", 1, 1 },
+                    { 2, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7190), null, null, null, "Ake Nathan", 1, 1 },
+                    { 1, new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(5790), null, null, null, "Ederson", 0, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -467,11 +460,6 @@ namespace Infrastructure.Migrations
                 name: "IX_SoccerGames_ReporterId",
                 table: "SoccerGames",
                 column: "ReporterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SoccerGames_SoccerTeamId",
-                table: "SoccerGames",
-                column: "SoccerTeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SoccerPlayers_SoccerTeamId",

@@ -52,7 +52,7 @@
             <th scope="col">Team</th>
             <th scope="col">Player</th>
             <th scope="col">Event</th>
-            <th scope="col">Action</th>
+            <th scope="col" *ngIf="game.gameStatus == 1">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -81,8 +81,13 @@
 
               {{ events[soccerEvent.soccerEventType].name }}
             </td>
-            <td>
-              <button class="btn btn-success">Edit</button>
+            <td *ngIf="game.gameStatus == 1">
+              <a
+                type="button"
+                class="btn btn-success"
+                [routerLink]="['edit', soccerEvent.id]"
+                >Edit</a
+              >
             </td>
           </tr>
         </tbody>

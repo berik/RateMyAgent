@@ -28,4 +28,14 @@ export class SoccerEventService {
       gameEvent
     );
   }
+
+  updateSoccerEvent(
+    eventId: string,
+    gameEvent: CreateSoccerEventDto
+  ): Observable<SoccerEventDto> {
+    return this.http.put<SoccerEventDto>(
+      `${this.baseApiUrl}/UpdateGameEvent/${eventId}`,
+      gameEvent
+    );
+  }
 }

@@ -1,0 +1,69 @@
+<div class="edit-soccer-event-page">
+  <div *ngIf="isLoading" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="soccerEvent && game">
+    <h4>Edit Event</h4>
+
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="selectTeam">Select team</label>
+              <select
+                class="form-control"
+                id="selectTeam"
+                formControlName="soccerTeam"
+                (change)="onSelectTeam()"
+              >
+                <option *ngFor="let team of teams" [ngValue]="team">
+                  {{ team.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="selectedTeam">
+              <label for="selectPlayer">Select player</label>
+              <select
+                class="form-control"
+                id="selectPlayer"
+                formControlName="soccerPlayer"
+                (change)="onSelectPlayer()"
+              >
+                <option
+                  *ngFor="let player of selectedTeam.players"
+                  [ngValue]="player"
+                >
+                  {{ player.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="selectedPlayer">
+              <label for="selectEvent">Select event</label>
+              <select
+                class="form-control"
+                id="selectEvent"
+                formControlName="soccerEvent"
+                (change)="onSelectEvent()"
+              >
+                <option [ngValue]="null" disabled>Choose your event</option>
+                <option *ngFor="let event of events" [ngValue]="event.id">
+                  {{ event.name }}
+                </option>
+              </select>
+            </div>
+            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+            <a
+              type="button"
+              class="btn btn-danger"
+              [routerLink]="['/games', gameId]"
+              >Cancel</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,11 +20,6 @@ namespace Core.Entities
         public virtual List<SoccerPlayer> Players { get; set; }
 
         /// <summary>
-        /// Each Team has a list of Past/Future games
-        /// </summary>
-        public virtual List<SoccerGame> SoccerGames { get; set; }
-        
-        /// <summary>
         /// Each Team has a list of events
         /// </summary>
         public virtual List<SoccerEvent> SoccerEvents { get; set; }

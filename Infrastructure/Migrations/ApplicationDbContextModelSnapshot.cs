@@ -91,15 +91,15 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4ab306a9-ff4c-46ca-a6f9-c47383d928d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b6a31fd1-549d-4c20-98b3-37dca73ee321",
+                            ConcurrencyStamp = "4436f249-2a6b-4d5f-9162-4c7e3c78f050",
                             Email = "berik.assylbekov@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "BERIK.ASSYLBEKOV@GMAIL.COM",
                             NormalizedUserName = "BERIK.ASSYLBEKOV@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAD4zvDT49u7tNk0fi6AoYVlTKdSr+9PSMZAbfsdA6EOkcJH3pJ+rikM/lEqlmXGSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJFlVU5r6buwHEZ2VrnGYuEV09vowwfbIhX7bjT9g8b2SsSbujP3ooCvEAxBaUp0eA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d43e241b-f669-46dc-a6e7-65841f6c6fff",
+                            SecurityStamp = "8724c1b5-123b-4594-8f44-78c2d17b2c2c",
                             TwoFactorEnabled = false,
                             UserName = "berik.assylbekov@gmail.com"
                         });
@@ -180,9 +180,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ReporterId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("SoccerTeamId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GuestSoccerTeamId");
@@ -191,15 +188,13 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ReporterId");
 
-                    b.HasIndex("SoccerTeamId");
-
                     b.ToTable("SoccerGames");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 536, DateTimeKind.Local).AddTicks(4420),
                             GameStatus = 0,
                             GuestSoccerTeamId = 2,
                             HomeSoccerTeamId = 1,
@@ -246,7 +241,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(5790),
                             Name = "Ederson",
                             SoccerPlayerType = 0,
                             SoccerTeamId = 1
@@ -254,7 +249,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7190),
                             Name = "Ake Nathan",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 1
@@ -262,7 +257,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7200),
                             Name = "Cancelo Joao",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 1
@@ -270,7 +265,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7210),
                             Name = "Dias Ruben",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 1
@@ -278,7 +273,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7280),
                             Name = "De Bruyne Kevin",
                             SoccerPlayerType = 2,
                             SoccerTeamId = 1
@@ -286,7 +281,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290),
                             Name = "Foden Phil",
                             SoccerPlayerType = 2,
                             SoccerTeamId = 1
@@ -294,7 +289,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290),
                             Name = "Aguero Sergio",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 1
@@ -302,7 +297,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7290),
                             Name = "Gabriel Jesus",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 1
@@ -310,7 +305,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300),
                             Name = "Sterling Raheem",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 1
@@ -318,7 +313,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300),
                             Name = "Guardiola Pep",
                             SoccerPlayerType = 4,
                             SoccerTeamId = 1
@@ -326,7 +321,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7300),
                             Name = "Neto",
                             SoccerPlayerType = 0,
                             SoccerTeamId = 2
@@ -334,7 +329,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310),
                             Name = "Alba Jordi",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 2
@@ -342,7 +337,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310),
                             Name = "Firpo Junior",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 2
@@ -350,7 +345,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310),
                             Name = "Mingueza Oscar",
                             SoccerPlayerType = 1,
                             SoccerTeamId = 2
@@ -358,7 +353,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7310),
                             Name = "Coutinho Philippe",
                             SoccerPlayerType = 2,
                             SoccerTeamId = 2
@@ -366,7 +361,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320),
                             Name = "Puig Ricard",
                             SoccerPlayerType = 2,
                             SoccerTeamId = 2
@@ -374,7 +369,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320),
                             Name = "de Jong Frenkie",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 2
@@ -382,7 +377,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7320),
                             Name = "Messi Lionel",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 2
@@ -390,7 +385,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 19,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7330),
                             Name = "Trincao",
                             SoccerPlayerType = 3,
                             SoccerTeamId = 2
@@ -398,7 +393,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 20,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 533, DateTimeKind.Local).AddTicks(7330),
                             Name = "Koeman Ronald",
                             SoccerPlayerType = 4,
                             SoccerTeamId = 2
@@ -436,13 +431,13 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 517, DateTimeKind.Local).AddTicks(4530),
                             Name = "Manchester City"
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2020, 12, 7, 23, 4, 21, 532, DateTimeKind.Local).AddTicks(2590),
                             Name = "Barcelona"
                         });
                 });
@@ -580,7 +575,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = "b43aaa03-ef03-4ec8-815b-5c79929361e9",
-                            ConcurrencyStamp = "bcbbd2a4-15aa-4d26-842f-98388cfcbe8d",
+                            ConcurrencyStamp = "4b61eda1-7c8a-4c6f-affa-6fa5d40b49b6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -746,10 +741,6 @@ namespace Infrastructure.Migrations
                         .WithMany("GameReviews")
                         .HasForeignKey("ReporterId");
 
-                    b.HasOne("Core.Entities.SoccerTeam", null)
-                        .WithMany("SoccerGames")
-                        .HasForeignKey("SoccerTeamId");
-
                     b.Navigation("GuestSoccerTeam");
 
                     b.Navigation("HomeSoccerTeam");
@@ -839,8 +830,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Players");
 
                     b.Navigation("SoccerEvents");
-
-                    b.Navigation("SoccerGames");
                 });
 #pragma warning restore 612, 618
         }

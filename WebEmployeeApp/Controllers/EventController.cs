@@ -85,5 +85,37 @@ namespace WebEmployeeApp.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        
+        [HttpPut("[action]/{eventId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateGameEvent(Guid eventId, [FromBody] CreateSoccerEventDto dto)
+        {
+            try
+            {
+                _logger.LogInformation($"Update new event by userID: {_currentUserService.UserId}");
+                var game = await _unitOfWork.GameRepository.GetByIdAsync(dto.SoccerGameId);
+                var soccerEvent = await _unitOfWork.EventRepository.GetByIdAsync(dto.SoccerGameId, eventId);
+                if (game != null && game.GameStatus == GameStatus.InProgress && soccerEvent != null)
+                {
+                    soccerEvent.SoccerTeamId = dto.SoccerTeamId;
+                    soccerEvent.SoccerPlayerId = dto.SoccerPlayerId;
+                    soccerEvent.SoccerEventType = dto.SoccerEventType;
+                    
+                    var result = _unitOfWork.EventRepository.Update(soccerEvent);
+                    await _unitOfWork.CompleteAsync();
+                    if (result != null)
+                        return NoContent();
+                }
+
+                _logger.LogError($"Something went wrong to create new event");
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Something went wrong inside StopGame action: {e.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

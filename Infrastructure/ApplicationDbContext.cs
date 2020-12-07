@@ -116,11 +116,13 @@ namespace Infrastructure
                 new SoccerTeam()
                 {
                     Id = ManchesterTeamId,
+                    Created = DateTime.Now,
                     Name = "Manchester City"
                 },
                 new SoccerTeam()
                 {
                     Id = BarcelonaTeamId,
+                    Created = DateTime.Now,
                     Name = "Barcelona"
                 }
             });
@@ -136,6 +138,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 1,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Ederson",
                     SoccerPlayerType = SoccerPlayerType.Goalkeeper,
@@ -143,6 +146,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 2,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Ake Nathan",
                     SoccerPlayerType = SoccerPlayerType.Defender,
@@ -150,6 +154,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 3,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Cancelo Joao",
                     SoccerPlayerType = SoccerPlayerType.Defender
@@ -157,6 +162,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 4,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Dias Ruben",
                     SoccerPlayerType = SoccerPlayerType.Defender,
@@ -164,6 +170,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 5,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "De Bruyne Kevin",
                     SoccerPlayerType = SoccerPlayerType.Midfielder
@@ -171,6 +178,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 6,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Foden Phil",
                     SoccerPlayerType = SoccerPlayerType.Midfielder,
@@ -178,6 +186,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 7,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Aguero Sergio",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -185,6 +194,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 8,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Gabriel Jesus",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -192,6 +202,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 9,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Sterling Raheem",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -199,6 +210,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 10,
+                    Created = DateTime.Now,
                     SoccerTeamId = ManchesterTeamId,
                     Name = "Guardiola Pep",
                     SoccerPlayerType = SoccerPlayerType.Coach
@@ -206,6 +218,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 11,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Neto",
                     SoccerPlayerType = SoccerPlayerType.Goalkeeper
@@ -213,6 +226,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 12,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Alba Jordi",
                     SoccerPlayerType = SoccerPlayerType.Defender,
@@ -220,6 +234,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 13,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Firpo Junior",
                     SoccerPlayerType = SoccerPlayerType.Defender
@@ -227,6 +242,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 14,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Mingueza Oscar",
                     SoccerPlayerType = SoccerPlayerType.Defender,
@@ -234,6 +250,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 15,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Coutinho Philippe",
                     SoccerPlayerType = SoccerPlayerType.Midfielder
@@ -241,13 +258,15 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 16,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Puig Ricard",
                     SoccerPlayerType = SoccerPlayerType.Midfielder,
                 },
                 new SoccerPlayer()
                 {
-                    Id = 17,
+                    Id = 17,                    
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "de Jong Frenkie",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -255,6 +274,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 18,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Messi Lionel",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -262,6 +282,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 19,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Trincao",
                     SoccerPlayerType = SoccerPlayerType.Forward
@@ -269,6 +290,7 @@ namespace Infrastructure
                 new SoccerPlayer()
                 {
                     Id = 20,
+                    Created = DateTime.Now,
                     SoccerTeamId = BarcelonaTeamId,
                     Name = "Koeman Ronald",
                     SoccerPlayerType = SoccerPlayerType.Coach
@@ -290,6 +312,7 @@ namespace Infrastructure
                 new SoccerGame()
                 {
                     Id = 1,
+                    Created = DateTime.Now,
                     Name = "Manchester City vs Barcelona",
                     GameStatus = GameStatus.NotStarted,
                     HomeSoccerTeamId = ManchesterTeamId,

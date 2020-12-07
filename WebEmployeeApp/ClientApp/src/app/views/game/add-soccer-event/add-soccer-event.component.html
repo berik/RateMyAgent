@@ -49,8 +49,20 @@
             </option>
           </select>
         </div>
-        <button class="btn btn-primary mr-2" type="submit">Submit</button>
-        <button class="btn btn-danger" type="button">Clear</button>
+        <button
+          [disabled]="
+            !this.model.soccerTeamId ||
+            !this.model.soccerPlayerId ||
+            !this.model.soccerEventType
+          "
+          class="btn btn-primary mr-2"
+          type="submit"
+        >
+          Submit
+        </button>
+        <a type="button" class="btn btn-danger" [routerLink]="['/games']"
+          >Cancel</a
+        >
       </form>
     </div>
   </div>
