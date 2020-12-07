@@ -4,30 +4,65 @@
   </div>
 
   <div *ngIf="game">
-    <div class="mb-3" *ngIf="!game.reporterId">
-      <button class="btn btn-success" (click)="assignGame(game.id)">
-        Assign to me
-      </button>
-    </div>
-
-    <h3>Report to {{ game.name }}</h3>
-    <div class="mb-3" *ngIf="game.gameStatus == 0">
-      <button class="btn btn-success" (click)="startGame(game.id)">
+    <h5>Report to {{ game.name }}</h5>
+    <div class="mb-3">
+      <a
+        class="btn btn-success mr-1"
+        [routerLink]="['new-event']"
+        *ngIf="game.gameStatus == 1"
+        >Add Event</a
+      >
+      <button
+        *ngIf="game.gameStatus == 0"
+        class="btn btn-success mr-1"
+        (click)="startGame(game.id)"
+      >
+        <span
+          *ngIf="gameIsUpdating"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <span class="sr-only">Loading...</span>
         Start Game
       </button>
-    </div>
-    <div class="mb-3" *ngIf="game.gameStatus == 1">
-      <button class="btn btn-success">Finish Game</button>
-    </div>
-
-    <div class="mb-3" *ngIf="game.gameStatus == 2">
-      <p>Game completed</p>
+      <button
+        *ngIf="game.gameStatus == 1"
+        class="btn btn-success"
+        (click)="stopGame(game.id)"
+      >
+        <span
+          *ngIf="gameIsUpdating"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <span class="sr-only">Loading...</span>
+        Stop Game
+      </button>
     </div>
 
     <div class="mb-3">
-      <h5>Select Event</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Team</th>
+            <th scope="col">Player</th>
+            <th scope="col">Event</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let soccerEvent of soccerEvents">
+            <td>{{ soccerEvent.soccerTeamId }}</td>
+            <td>{{ soccerEvent.soccerPlayer.name }}</td>
+            <td>event</td>
+            <td>
+              <button class="btn btn-success">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="mb-3"></div>
   </div>
 </div>

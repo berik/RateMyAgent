@@ -8,11 +8,13 @@ namespace Infrastructure
         private readonly ApplicationDbContext _context;
 
         public IGameRepository GameRepository { get; }
-        
+        public IEventRepository EventRepository { get; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             GameRepository = new GameRepository(_context);
+            EventRepository = new EventRepository(_context);
         }
         
         public void Dispose()

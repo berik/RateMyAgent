@@ -277,7 +277,7 @@ namespace Infrastructure
         {
             modelBuilder.HasOne(a => a.HomeSoccerTeam).WithMany().HasForeignKey(a => a.HomeSoccerTeamId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             modelBuilder.HasOne(a => a.GuestSoccerTeam).WithMany().HasForeignKey(a => a.GuestSoccerTeamId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -301,6 +301,11 @@ namespace Infrastructure
                 .HasOne(p => p.SoccerPlayer)
                 .WithMany(b => b.SoccerEvents)
                 .HasForeignKey(p => p.SoccerPlayerId);
+
+            modelBuilder
+                .HasOne(p => p.SoccerGame)
+                .WithMany(b => b.SoccerEvents)
+                .HasForeignKey(p => p.SoccerGameId);
         }
     }
 }

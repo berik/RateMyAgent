@@ -5,8 +5,7 @@ namespace Core.Interfaces.IServices
 {
     public interface IGameService
     {
-        Task<SoccerGame> AssignGameToUser(SoccerGame soccerGame, string userId);
-        
         Task<SoccerGame> StartGame(SoccerGame soccerGame, string userId);
+        Task<SoccerGame> StopGame(SoccerGame soccerGame);
     }
 }

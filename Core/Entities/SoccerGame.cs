@@ -39,7 +39,7 @@ namespace Core.Entities
         /// <summary>
         /// List of "important events"
         /// </summary>
-        public List<SoccerEvent> SoccerEvents { get; set; } = new List<SoccerEvent>();
+        public virtual List<SoccerEvent> SoccerEvents { get; set; } = new List<SoccerEvent>();
         
         /// <summary>
         /// Nav.Property

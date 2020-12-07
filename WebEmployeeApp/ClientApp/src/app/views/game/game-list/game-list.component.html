@@ -2,21 +2,38 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div *ngIf="games" class="list-group">
-      <a
-        type="button"
-        class="list-group-item list-group-item-action d-flex justify-content-between"
-        [routerLink]="['/games', game.id]"
-        *ngFor="let game of games"
-      >
-        {{ game.name }}
-
-        <span class="badge badge-primary">
-          {{ getStatus(game.gameStatus) }}
-        </span>
-      </a>
-    </div>
-  </div>
+<div class="mb-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Game Name</th>
+        <th scope="col">Game Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{ game.name }}</td>
+        <td>
+          {{ getStatus(game) }}
+        </td>
+        <td>
+          <a
+            type="button"
+            class="btn btn-success mr-1"
+            [routerLink]="['/games', game.id]"
+            *ngIf="game.gameStatus != 0"
+          >
+            View
+          </a>
+          <button class="btn btn-success" *ngIf="game.gameStatus == 0">
+            Start report
+          </button>
+          <button class="btn btn-success" *ngIf="game.gameStatus == 1">
+            Continue report
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

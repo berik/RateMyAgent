@@ -14,24 +14,26 @@ namespace Core.Services
         {
             _unitOfWork = unitOfWork;
         }
-
-        public async Task<SoccerGame> AssignGameToUser(SoccerGame soccerGame, string userId)
-        {
-            if (!string.IsNullOrEmpty(soccerGame.ReporterId)) return null;
-            
-            soccerGame.ReporterId = userId;
-            _unitOfWork.GameRepository.Update(soccerGame);
-            await _unitOfWork.CompleteAsync();
-            return soccerGame;
-        }
-
+        
         public async Task<SoccerGame> StartGame(SoccerGame soccerGame, string userId)
         {
-            if (string.IsNullOrEmpty(soccerGame.ReporterId)) return null;
-
             if (soccerGame.GameStatus == GameStatus.NotStarted)
             {
                 soccerGame.GameStatus = GameStatus.InProgress;
+                soccerGame.ReporterId = userId;
+                _unitOfWork.GameRepository.Update(soccerGame);
+                await _unitOfWork.CompleteAsync();
+                return soccerGame;
+            };
+
+            return null;
+        }
+
+        public async Task<SoccerGame> StopGame(SoccerGame soccerGame)
+        {
+            if (soccerGame.GameStatus == GameStatus.InProgress)
+            {
+                soccerGame.GameStatus = GameStatus.Finished;
                 _unitOfWork.GameRepository.Update(soccerGame);
                 await _unitOfWork.CompleteAsync();
                 return soccerGame;

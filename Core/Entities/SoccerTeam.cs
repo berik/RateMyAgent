@@ -17,11 +17,11 @@ namespace Core.Entities
         /// <summary>
         /// List of players
         /// </summary>
-        public List<SoccerPlayer> Players { get; set; } = new List<SoccerPlayer>();
+        public virtual List<SoccerPlayer> Players { get; set; } = new List<SoccerPlayer>();
 
         /// <summary>
         /// Each Team has a list of Past/Future games
         /// </summary>
-        public List<SoccerGame> SoccerGames { get; set; } = new List<SoccerGame>();
+        public virtual List<SoccerGame> SoccerGames { get; set; } = new List<SoccerGame>();
     }
 }

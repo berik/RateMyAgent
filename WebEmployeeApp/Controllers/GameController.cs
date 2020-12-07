@@ -56,42 +56,6 @@ namespace WebEmployeeApp.Controllers
             var gameDto = _mapper.Map<SoccerGameDto>(game);
             return Ok(gameDto);
         }
-
-        [HttpPut("[action]/{gameId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AssignGame(int gameId)
-        {
-            try
-            {
-                if (gameId == 0)
-                {
-                    _logger.LogError($"Specified gameId {gameId} sent from client is null.");
-                    return BadRequest();
-                }
-
-                var soccerGame = await _unitOfWork.GameRepository.GetByIdAsync(gameId);
-                if (soccerGame == null)
-                {
-                    _logger.LogError($"Specified gameId {gameId} is not found.");
-                    return NotFound();
-                }
-
-                var result = await _gameService.AssignGameToUser(soccerGame, _currentUserService.UserId);
-                if (result != null)
-                {
-                    return NoContent();
-                }
-
-                return BadRequest();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Something went wrong inside AssignGame action: {e.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
         
         [HttpPut("[action]/{gameId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -117,6 +81,42 @@ namespace WebEmployeeApp.Controllers
                 var result = await _gameService.StartGame(soccerGame, _currentUserService.UserId);
                 if (result != null)
                 {
+                    return NoContent(); 
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Something went wrong inside StartGame action: {e.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        
+        [HttpPut("[action]/{gameId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> StopGame(int gameId)
+        {
+            try
+            {
+                if (gameId == 0)
+                {
+                    _logger.LogError($"Specified gameId {gameId} sent from client is null.");
+                    return BadRequest();
+                }
+
+                var soccerGame = await _unitOfWork.GameRepository.GetByIdAsync(gameId);
+                if (soccerGame == null)
+                {
+                    _logger.LogError($"Specified gameId {gameId} is not found.");
+                    return NotFound();
+                }
+
+                var result = await _gameService.StopGame(soccerGame);
+                if (result != null)
+                {
                     return NoContent();
                 }
 
@@ -124,7 +124,7 @@ namespace WebEmployeeApp.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError($"Something went wrong inside AssignGame action: {e.Message}");
+                _logger.LogError($"Something went wrong inside StopGame action: {e.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

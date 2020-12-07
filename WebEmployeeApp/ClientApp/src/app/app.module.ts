@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
@@ -12,6 +12,7 @@ import { AuthorizeGuard } from "src/api-authorization/authorize.guard";
 import { AuthorizeInterceptor } from "src/api-authorization/authorize.interceptor";
 import { GameDetailsComponent } from "./views/game/game-details/game-details.component";
 import { GameListComponent } from "./views/game/game-list/game-list.component";
+import { AddSoccerEventComponent } from "./views/game/add-soccer-event/add-soccer-event.component";
 
 @NgModule({
   declarations: [
@@ -20,11 +21,13 @@ import { GameListComponent } from "./views/game/game-list/game-list.component";
     HomeComponent,
     GameListComponent,
     GameDetailsComponent,
+    AddSoccerEventComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
@@ -36,6 +39,11 @@ import { GameListComponent } from "./views/game/game-list/game-list.component";
       {
         path: "games/:gameId",
         component: GameDetailsComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: "games/:gameId/new-event",
+        component: AddSoccerEventComponent,
         canActivate: [AuthorizeGuard],
       },
     ]),

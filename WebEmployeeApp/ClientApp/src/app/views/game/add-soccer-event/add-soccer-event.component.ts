@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { SoccerEventType } from "src/app/models/enums/SoccerEventType";
 import {
   CreateSoccerEventDto,
@@ -13,18 +13,15 @@ import { GameServiceService } from "src/app/services/game-service.service";
 import { SoccerEventService } from "src/app/services/soccer-event.service";
 
 @Component({
-  selector: "app-game-details",
-  templateUrl: "./game-details.component.html",
-  styleUrls: ["./game-details.component.css"],
+  selector: "app-add-soccer-event",
+  templateUrl: "./add-soccer-event.component.html",
+  styleUrls: ["./add-soccer-event.component.css"],
 })
-export class GameDetailsComponent implements OnInit {
+export class AddSoccerEventComponent implements OnInit {
   isLoading = false;
-  isLoadingEvents = false;
-  gameIsUpdating = false;
-  soccerEvents: SoccerEventDto[] = [];
-
   eventIsSubmitting = false;
   gameId: string;
+  soccerEvents: SoccerEventDto[] = [];
   game: SoccerGameDto;
   teams: SoccerTeamDto[] = [];
   selectedTeam: SoccerTeamDto;
@@ -43,15 +40,16 @@ export class GameDetailsComponent implements OnInit {
   };
   eventForm: FormGroup;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private gameService: GameServiceService,
     private soccerEventService: SoccerEventService
   ) {}
+
   ngOnInit() {
     this.gameId = this.route.snapshot.paramMap.get("gameId");
     if (this.gameId) {
       this.getGame(this.gameId);
-      this.getSoccerEvents(this.gameId);
     }
     this.initForm();
   }
@@ -61,14 +59,6 @@ export class GameDetailsComponent implements OnInit {
       soccerTeam: new FormControl(null, Validators.required),
       soccerPlayer: new FormControl(null, Validators.required),
       soccerEvent: new FormControl(null, Validators.required),
-    });
-  }
-
-  getSoccerEvents(gameId: string) {
-    this.isLoadingEvents = true;
-    this.soccerEventService.getSoccerEvents(gameId).subscribe((result) => {
-      this.isLoadingEvents = false;
-      this.soccerEvents = result;
     });
   }
 
@@ -82,19 +72,30 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
-  startGame(gameId: string) {
-    this.gameIsUpdating = true;
-    this.gameService.startGame(gameId).subscribe(() => {
-      this.gameIsUpdating = false;
-      this.game.gameStatus = 1;
-    });
+  onSelectTeam() {
+    let soccerTeam: SoccerTeamDto = this.eventForm.get("soccerTeam").value;
+    this.selectedTeam = soccerTeam;
+    this.model.soccerTeamId = soccerTeam.id;
   }
 
-  stopGame(gameId: string) {
-    this.gameIsUpdating = true;
-    this.gameService.stopGame(gameId).subscribe(() => {
-      this.gameIsUpdating = false;
-      this.game.gameStatus = 2;
+  onSelectPlayer() {
+    let soccerPlayer: SoccerPlayerDto = this.eventForm.get("soccerPlayer")
+      .value;
+    this.model.soccerPlayerId = soccerPlayer.id;
+    this.selectedPlayer = soccerPlayer;
+  }
+
+  onSelectEvent() {
+    let soccerEvent: SoccerEventType = this.eventForm.get("soccerEvent").value;
+    this.model.soccerEventType = soccerEvent;
+  }
+
+  onSubmit() {
+    this.eventIsSubmitting = true;
+    this.model.soccerGameId = this.gameId;
+    this.soccerEventService.addSoccerEvent(this.model).subscribe(() => {
+      this.eventIsSubmitting = false;
+      this.router.navigate(["/games", this.gameId], { relativeTo: this.route });
     });
   }
 }

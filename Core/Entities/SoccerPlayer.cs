@@ -33,6 +33,6 @@ namespace Core.Entities
         /// <summary>
         /// Each player has a list of soccer events
         /// </summary>
-        public List<SoccerEvent> SoccerEvents { get; set; }
+        public virtual List<SoccerEvent> SoccerEvents { get; set; }
     }
 }

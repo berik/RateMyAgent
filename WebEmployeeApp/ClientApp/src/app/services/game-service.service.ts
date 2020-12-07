@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { CreateSoccerEventDto, SoccerEventDto } from "../models/SoccerEventDto";
 import { SoccerGameDto } from "../models/SoccerGameDto";
 
 @Injectable({
@@ -20,11 +21,11 @@ export class GameServiceService {
     return this.http.get<SoccerGameDto>(`${this.baseApiUrl}/${gameId}`);
   }
 
-  assignGame(gameId: string): Observable<string> {
-    return this.http.put<string>(`${this.baseApiUrl}/AssignGame/${gameId}`, {});
-  }
-
   startGame(gameId: string): Observable<string> {
     return this.http.put<string>(`${this.baseApiUrl}/StartGame/${gameId}`, {});
+  }
+
+  stopGame(gameId: string): Observable<string> {
+    return this.http.put<string>(`${this.baseApiUrl}/StopGame/${gameId}`, {});
   }
 }
